@@ -11,7 +11,7 @@ let score = 0;
 const greenSlice = document.querySelector('.green-slice');
 const redSlice = document.querySelector('.red-slice');
 const yellowSlice = document.querySelector('.yellow-slice');
-const blueSlice = document.querySelector('blue-slice');
+const blueSlice = document.querySelector('.blue-slice');
 
 //create a color random order
 let shuffleOrder = () => {
@@ -30,10 +30,10 @@ let lightColor = (element, number) => {
 	number = number * 500;
 	setTimeout(() => {
 	element.classList.add('selected');	
-	},tempo - 250);
+	},number - 250);
 	
 	setTimeout(() => {
-		element.class.remove('selected');
+		element.classList.remove('selected');
 	});
 }
 
@@ -41,12 +41,12 @@ let lightColor = (element, number) => {
 let checkOrder = () => {
 	for(let i in clickedOrder) {
 	    if(clickedOrder[i] != order[i]) {
-		lose();
+		gameOver();
 		break;
 	    }
     }
 	if(clickedOrder.length == order.length) {
-		 alert(`Score: $(score)\nYou are right! Next level!`);
+		 alert(`Score: ${score}\nYou are right! Next level!`);
 		 nextLevel();
     }
 }
@@ -58,15 +58,52 @@ let click = (color) => {
 	
 	setTimeout(() => {
 		createColorElement(color).classList.remove('selected');
-	});
+		checkOrder();
+	},250);
 	
-	checkOrder();
+	
 }
 	
-	
-	
-	
+let createColorElement = (color) => {
+	if(color == 0) {
+		return greenSlice;
+	}else if(color == 1) {
+		return redSlice;
+	}else if(color == 2) {
+        return yellowSlice
+    }else if(color == 3) {
+        return blueSlice 
+    }
+}
+
+let nextLevel = () => {
+	score++;
+	shuffleOrder();
+}	
 		
-		
+//function game over
+let gameOver = () => {
+	alert(`Score: ${score}\nYou made a mistake! You lose!\n Click OK to start a new game.`);
+	order = [];
+	clickedOrder = [];
+	
+	playGame();
+}
+
+// function starts the game
+let playGame = () => {
+    alert (`Welcome to Genius! You are good to remember?\n Let\'s test your brain with this funny game.\nClick to start.`);
+    score = 0;
+
+    nextLevel();
+}
+	
+greenSlice.onclick = () => click(0);
+redSlice.onclick = () => click(1);
+yellowSlice.onclick = () => click(2);
+blueSlice.onclick = () => click(3);
+
+
+playGame();
 		
 		
