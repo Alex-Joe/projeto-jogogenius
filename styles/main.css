@@ -13,12 +13,35 @@ body {
 
 .genius {
 	display: grid;
-	grid-template-areas: 'green red'
-	                     'yellow blue';
+	grid-template-areas: 'green-slice red-slice'
+	                     'yellow-slice blue-slice';
 	grid-gap: 10px;
     border: 1px solid #FFFFFF;
     background-color: #FFFFFF;
     border-radius: 100%;
     width: 700px;	
 	height: 700px;
+}
+
+.blue-slice {
+	grid-area: blue-slice;
+	background-color: skyblue;
+	border-bottom-right-radius: 100%;
+}
+
+.green-slice {
+	grid-area: green-slice;
+	background-color: lightgreen;
+	border-top-left-radius: 100%;
+}
+
+.yellow-slice {
+	grid-area: yellow-slice;
+	background-color: #efd910;
+	border-bottom-left-radius: 100%;
+}
+.red-slice {
+	grid-area: red-slice;
+	background-color: #dc2222;
+	border-top-right-radius: 100%;
 }
